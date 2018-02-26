@@ -1,0 +1,1 @@
+![](https://github.com/seiroise/UniTriangulation2D/blob/media/media/deraunay1.gif)
