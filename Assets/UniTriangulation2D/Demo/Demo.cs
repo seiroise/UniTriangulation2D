@@ -27,7 +27,11 @@ namespace UniTriangulation2D {
 				AddPosition(GetMousePosition());
 			} else if(Input.GetMouseButtonUp(0)) {
 				_isDragging = false;
+
+				var sw = System.Diagnostics.Stopwatch.StartNew();
 				_delaunay = new Delaunay2D(_points);
+				sw.Stop();
+				Debug.Log(sw.ElapsedMilliseconds);
 			} else if(Input.GetMouseButton(0)) {
 				Vector2 pos = GetMousePosition();
 				if((pos - _points[_points.Count - 1]).magnitude > 0.5f) {

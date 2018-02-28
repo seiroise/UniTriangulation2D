@@ -14,6 +14,8 @@ namespace UniTriangulation2D {
 		List<Triangle2D> tempAdding { get; set; }
 		List<Triangle2D> tempRemoving { get; set; }
 
+		Dictionary<Triangle2D, bool> temp { get; set; }
+
 		Triangle2D hugeTriangle { get; set; }
 
 		/*
@@ -28,6 +30,8 @@ namespace UniTriangulation2D {
 			triangles = new HashSet<Triangle2D>();
 			tempAdding = new List<Triangle2D>();
 			tempRemoving = new List<Triangle2D>();
+
+			temp = new Dictionary<Triangle2D, bool>();
 
 			Triangulate(points);
 		}
@@ -56,6 +60,8 @@ namespace UniTriangulation2D {
 			}
 
 			RemoveCommonPointWithHugeTriangle();
+
+			RemoveExternalTriangles(points);
 		}
 
 		/// <summary>
@@ -100,7 +106,6 @@ namespace UniTriangulation2D {
 				triangles.Remove(tempRemoving[i]);
 			}
 
-			Dictionary<Triangle2D, bool> temp = new Dictionary<Triangle2D, bool>();
 			for(var i = 0; i < tempAdding.Count; ++i) {
 				if(!temp.ContainsKey(tempAdding[i])) {
 					temp.Add(tempAdding[i], false);
@@ -156,6 +161,20 @@ namespace UniTriangulation2D {
 					tempRemoving.Add(t);
 				}
 			}
+
+			ResolveTempTriangles();
+		}
+
+		/// <summary>
+		/// 入力された頂点群をポリゴンとしてその外部にある三角形を取り除く
+		/// この関数は必ずTriangulate関数の後に呼び出すこと。
+		/// </summary>
+		void RemoveExternalTriangles(List<Vector2> points) {
+			ForeachTriangles((Triangle2D t) => {
+				if(!Utils2D.Pnpoly(points, t.g)) {
+					tempRemoving.Add(t);
+				}
+			});
 
 			ResolveTempTriangles();
 		}

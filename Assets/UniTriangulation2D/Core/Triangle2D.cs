@@ -12,6 +12,8 @@ namespace UniTriangulation2D {
 		public Vector2 p1 { get; private set; }
 		public Vector2 p2 { get; private set; }
 
+		public Vector2 g { get; private set; }
+
 		public Circle2D circumscribedCircle {
 			get {
 				if(_circumscribedCircle == null) _circumscribedCircle = ComputeCircumscribedCircle();
@@ -23,6 +25,8 @@ namespace UniTriangulation2D {
 			this.p0 = p0;
 			this.p1 = p1;
 			this.p2 = p2;
+
+			this.g = (p0 + p1 + p2) * 0.33f;
 		}
 
 		public override bool Equals(object obj) {
