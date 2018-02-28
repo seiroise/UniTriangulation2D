@@ -80,12 +80,11 @@ namespace UniTriangulation2D {
 			return new Circle2D(center, radius);
 		}
 
+		/// <summary>
+		/// デバッグ用の簡易描画
+		/// </summary>
 		public void DebugDraw() {
 			DebugExtention.DrawTriangle(p0, p1, p2, Color.green);
-		}
-
-		public Triangle2D Copy() {
-			return MemberwiseClone() as Triangle2D;
 		}
 	}
 }

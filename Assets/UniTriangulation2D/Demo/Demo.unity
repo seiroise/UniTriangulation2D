@@ -121,8 +121,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 409908915}
-  - component: {fileID: 409908916}
   - component: {fileID: 409908917}
+  - component: {fileID: 409908919}
+  - component: {fileID: 409908918}
+  - component: {fileID: 409908916}
   m_Layer: 0
   m_Name: PSGL
   m_TagString: Untagged
@@ -154,6 +156,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e493b0c05f24671869564958f60886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sampleColors:
+  - {r: 0.85294116, g: 0.49545845, b: 0.49545845, a: 1}
+  - {r: 0.6529632, g: 0.75709134, b: 0.759, a: 1}
+  - {r: 0.85294116, g: 0.7729152, b: 0.50800174, a: 1}
+  - {r: 0.36548442, g: 0.7647059, b: 0.6832646, a: 1}
+  - {r: 0.934, g: 0.686363, b: 0.38854402, a: 1}
+  - {r: 0.39097953, g: 0.35369396, b: 0.46599996, a: 1}
+  - {r: 0.86764705, g: 0.28364405, b: 0.13397494, a: 1}
+  - {r: 0.7636864, g: 0.928, b: 0.55958396, a: 1}
 --- !u!120 &409908917
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -242,6 +253,47 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!33 &409908918
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409908914}
+  m_Mesh: {fileID: 0}
+--- !u!23 &409908919
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409908914}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &646259753
 GameObject:
   m_ObjectHideFlags: 0

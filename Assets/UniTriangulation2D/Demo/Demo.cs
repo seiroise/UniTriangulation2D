@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace UniTriangulation2D {
 
-	[RequireComponent(typeof(LineRenderer))]
+	[RequireComponent(typeof(LineRenderer), typeof(MeshRenderer), typeof(MeshFilter))]
 	public class Demo : MonoBehaviour {
+
+		public Color[] sampleColors;
 
 		Delaunay2D _delaunay;
 
@@ -13,10 +15,12 @@ namespace UniTriangulation2D {
 		bool _isDragging;
 
 		LineRenderer _lineRenderer;
+		MeshFilter _meshFilter;
 
 		void Awake() {
 			_points = new List<Vector2>();
 			_lineRenderer = GetComponent<LineRenderer>();
+			_meshFilter = GetComponent<MeshFilter>();
 		}
 
 		void Update() {
@@ -29,7 +33,8 @@ namespace UniTriangulation2D {
 				_isDragging = false;
 
 				var sw = System.Diagnostics.Stopwatch.StartNew();
-				_delaunay = new Delaunay2D(_points);
+				_delaunay = Delaunay2D.Contour(_points);
+				_meshFilter.mesh = _delaunay.ToMesh(sampleColors[Random.Range(0, sampleColors.Length)]);
 				sw.Stop();
 				Debug.Log(sw.ElapsedMilliseconds);
 			} else if(Input.GetMouseButton(0)) {

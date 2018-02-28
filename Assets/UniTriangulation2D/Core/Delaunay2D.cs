@@ -37,6 +37,26 @@ namespace UniTriangulation2D {
 		}
 
 		/*
+		 * Static methods
+		 */
+
+		/// <summary>
+		/// 輪郭線情報から三角形分割を行う。
+		/// </summary>
+		/// <returns>The contour.</returns>
+		/// <param name="contour">Contour.</param>
+		public static Delaunay2D Contour(List<Vector2> contour) {
+
+			var intersections = Utils2D.Intersect(contour);
+			contour.AddRange(intersections);
+
+			var d = new Delaunay2D(contour);
+			d.RemoveExternalTriangles(contour);
+
+			return d;
+		}
+
+		/*
 		 * Methods
 		 */
 
@@ -60,22 +80,20 @@ namespace UniTriangulation2D {
 			}
 
 			RemoveCommonPointWithHugeTriangle();
-
-			RemoveExternalTriangles(points);
 		}
 
 		/// <summary>
 		/// 座標を追加する
 		/// </summary>
 		/// <param name="point">Point.</param>
-		void AddPoint(Vector2 point) {
+		public void AddPoint(Vector2 point) {
 			foreach(var t in triangles) {
 				if(t.circumscribedCircle.Overlap(point)) {
 					SplitTriangle(t, point);
 					tempRemoving.Add(t);
 				}
 			}
-			ResolveTempTriangles();
+			SolveTempTriangles();
 		}
 
 		/// <summary>
@@ -101,7 +119,7 @@ namespace UniTriangulation2D {
 		/// <summary>
 		/// 一時的に保持されてる三角形を解決する
 		/// </summary>
-		void ResolveTempTriangles() {
+		void SolveTempTriangles() {
 			for(var i = 0; i < tempRemoving.Count; ++i) {
 				triangles.Remove(tempRemoving[i]);
 			}
@@ -162,12 +180,12 @@ namespace UniTriangulation2D {
 				}
 			}
 
-			ResolveTempTriangles();
+			SolveTempTriangles();
 		}
 
 		/// <summary>
-		/// 入力された頂点群をポリゴンとしてその外部にある三角形を取り除く
-		/// この関数は必ずTriangulate関数の後に呼び出すこと。
+		/// 入力された頂点群をポリゴンとし、その外部にある三角形を取り除く
+		/// この関数はTriangulate関数の後に呼び出すこと。
 		/// </summary>
 		void RemoveExternalTriangles(List<Vector2> points) {
 			ForeachTriangles((Triangle2D t) => {
@@ -176,7 +194,16 @@ namespace UniTriangulation2D {
 				}
 			});
 
-			ResolveTempTriangles();
+			SolveTempTriangles();
+		}
+
+		/// <summary>
+		/// 頂点カラーを指定して三角形情報からメッシュに変換する。
+		/// </summary>
+		/// <returns>The mesh.</returns>
+		/// <param name="color">Color.</param>
+		public Mesh ToMesh(Color color) {
+			return Utils2D.TrianglesToMesh(new List<Triangle2D>(triangles), color);
 		}
 	}
 }
