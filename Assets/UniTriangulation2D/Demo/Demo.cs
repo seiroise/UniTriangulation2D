@@ -9,6 +9,8 @@ namespace UniTriangulation2D {
 
 		public Color[] sampleColors;
 
+		public AnimationCurve curve;
+
 		Delaunay2D _delaunay;
 
 		List<Vector2> _points;
@@ -16,11 +18,17 @@ namespace UniTriangulation2D {
 
 		LineRenderer _lineRenderer;
 		MeshFilter _meshFilter;
+		MeshRenderer _meshRenderer;
+		Material _material;
+
+		Coroutine _coroutine;
 
 		void Awake() {
 			_points = new List<Vector2>();
 			_lineRenderer = GetComponent<LineRenderer>();
 			_meshFilter = GetComponent<MeshFilter>();
+			_meshRenderer = GetComponent<MeshRenderer>();
+			_material = _meshRenderer.sharedMaterial;
 		}
 
 		void Update() {
@@ -34,9 +42,17 @@ namespace UniTriangulation2D {
 
 				var sw = System.Diagnostics.Stopwatch.StartNew();
 				_delaunay = Delaunay2D.Contour(_points);
-				_meshFilter.mesh = _delaunay.ToMesh(sampleColors[Random.Range(0, sampleColors.Length)]);
+				var mesh = _delaunay.ToMesh(sampleColors[Random.Range(0, sampleColors.Length)]);
+				_meshFilter.mesh = mesh;
 				sw.Stop();
 				Debug.Log(sw.ElapsedMilliseconds);
+
+				var maxDistance = mesh.bounds.size.magnitude * 0.5f + 1f;
+				Vector3 center = mesh.bounds.center;
+
+				StopCoroutine(_coroutine);
+				_coroutine = StartCoroutine(ShowCotourine(1f, maxDistance, center));
+
 			} else if(Input.GetMouseButton(0)) {
 				Vector2 pos = GetMousePosition();
 				if((pos - _points[_points.Count - 1]).magnitude > 0.5f) {
@@ -67,6 +83,22 @@ namespace UniTriangulation2D {
 		void ClearPositions() {
 			_points.Clear();
 			_lineRenderer.positionCount = 0;
+		}
+
+		IEnumerator ShowCotourine(float time, float distance, Vector3 center) {
+			if(_material) {
+				_material.SetVector("_MaskPosition", center);
+
+				var e = 0f;
+				var t = 0f;
+				while(e < time) {
+					t = e / time;
+					_material.SetFloat("_Distance", curve.Evaluate(t) * distance);
+					e += Time.deltaTime;
+					yield return 0f;
+				}
+				_material.SetFloat("_Distance", distance);
+			}
 		}
 	}
 }

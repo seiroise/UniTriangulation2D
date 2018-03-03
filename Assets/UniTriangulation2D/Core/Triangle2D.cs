@@ -8,9 +8,11 @@ namespace UniTriangulation2D {
 
 		Circle2D _circumscribedCircle;
 
-		public Vector2 p0 { get; private set; }
-		public Vector2 p1 { get; private set; }
-		public Vector2 p2 { get; private set; }
+		public Vector2[] points { get; private set; }
+
+		public Vector2 p0 { get { return points[0]; } }
+		public Vector2 p1 { get { return points[1]; } }
+		public Vector2 p2 { get { return points[2]; } }
 
 		public Vector2 g { get; private set; }
 
@@ -22,9 +24,11 @@ namespace UniTriangulation2D {
 		}
 
 		public Triangle2D(Vector2 p0, Vector2 p1, Vector2 p2) {
-			this.p0 = p0;
-			this.p1 = p1;
-			this.p2 = p2;
+			this.points = new Vector2[3];
+
+			this.points[0] = p0;
+			this.points[1] = p1;
+			this.points[2] = p2;
 
 			this.g = (p0 + p1 + p2) * 0.33f;
 		}
