@@ -15,7 +15,7 @@ namespace UniTriangulation2D {
 		public Vector2 p2 { get { return points[2]; } }
 
 		public Vector2 g { get; private set; }
-
+		public float s { get; private set; }
 		public Circle2D circumscribedCircle {
 			get {
 				if(_circumscribedCircle == null) _circumscribedCircle = ComputeCircumscribedCircle();
@@ -31,6 +31,8 @@ namespace UniTriangulation2D {
 			this.points[2] = p2;
 
 			this.g = (p0 + p1 + p2) * 0.33f;
+
+			this.s = ComputeSize();
 		}
 
 		public override bool Equals(object obj) {
@@ -91,6 +93,20 @@ namespace UniTriangulation2D {
 			radius = (center - p0).magnitude;
 
 			return new Circle2D(center, radius);
+		}
+
+		/// <summary>
+		/// 三角形の面積を計算し、返す。
+		/// ヘロンの公式より
+		/// </summary>
+		/// <returns>The size.</returns>
+		float ComputeSize() {
+			var a = (p0 - p1).magnitude;
+			var b = (p1 - p2).magnitude;
+			var c = (p2 - p0).magnitude;
+
+			var s = (a + b + c) * 0.5f;
+			return Mathf.Sqrt(s * (s - a) * (s - b) * (s - c));
 		}
 
 		/// <summary>
