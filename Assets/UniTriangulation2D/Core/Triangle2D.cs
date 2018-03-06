@@ -57,6 +57,15 @@ namespace UniTriangulation2D {
 		}
 
 		/// <summary>
+		/// 入力した頂点を持つか。
+		/// </summary>
+		/// <returns><c>true</c>, if point was hased, <c>false</c> otherwise.</returns>
+		/// <param name="p">P.</param>
+		public bool HasPoint(Vector2 p) {
+			return p0 == p || p1 == p || p2 == p;
+		}
+
+		/// <summary>
 		/// 外接円を計算し、返す
 		/// </summary>
 		/// <returns>The circumscribed circle.</returns>
@@ -89,6 +98,14 @@ namespace UniTriangulation2D {
 		/// </summary>
 		public void DebugDraw() {
 			DebugExtention.DrawTriangle(p0, p1, p2, Color.green);
+		}
+
+		/// <summary>
+		/// デバッグ用の簡易描画
+		/// </summary>
+		/// <param name="color">Color.</param>
+		public void DebugDraw(Color color) {
+			DebugExtention.DrawTriangle(p0, p1, p2, color);
 		}
 	}
 }

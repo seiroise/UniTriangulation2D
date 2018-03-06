@@ -50,7 +50,9 @@ namespace UniTriangulation2D {
 				var maxDistance = mesh.bounds.size.magnitude * 0.5f + 1f;
 				Vector3 center = mesh.bounds.center;
 
-				StopCoroutine(_coroutine);
+				if(_coroutine != null) {
+					StopCoroutine(_coroutine);
+				}
 				_coroutine = StartCoroutine(ShowCotourine(1f, maxDistance, center));
 
 			} else if(Input.GetMouseButton(0)) {
@@ -99,6 +101,7 @@ namespace UniTriangulation2D {
 				}
 				_material.SetFloat("_Distance", distance);
 			}
+			_coroutine = null;
 		}
 	}
 }
