@@ -49,9 +49,6 @@ namespace UniTriangulation2D {
 		/// <param name="contour">Contour.</param>
 		public static Delaunay2D Contour(List<Vector2> contour) {
 
-			var intersections = Utils2D.Intersect(contour);
-			contour.AddRange(intersections);
-
 			var d = new Delaunay2D(contour);
 			d.RemoveExternalTriangles(contour);
 
