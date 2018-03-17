@@ -30,7 +30,7 @@ namespace UniTriangulation2D {
 			this.points[1] = p1;
 			this.points[2] = p2;
 
-			this.g = (p0 + p1 + p2) * 0.33f;
+			this.g = (p0 + p1 + p2) / 3f;
 
 			this.s = ComputeSize();
 		}
