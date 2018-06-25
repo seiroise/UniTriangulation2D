@@ -12,7 +12,7 @@ namespace Seiro.UniTriangulation2D
     {
 
         static readonly float PI_2 = Mathf.PI * 2f;
-        static readonly Matrix4x4 MAT_IDENTITY = Matrix4x4.identity;
+        // static readonly Matrix4x4 MAT_IDENTITY = Matrix4x4.identity;
         static readonly Quaternion QUAT_ROTATION_N30 = Quaternion.AngleAxis(-30f, Vector3.forward);
         static readonly Quaternion QUAT_ROTATION_P30 = Quaternion.AngleAxis(30f, Vector3.forward);
 

@@ -18,7 +18,7 @@ namespace Seiro.UniTriangulation2D.Demo
         Delaunay2D _delaunay;
 
         List<Vector2> _points;
-        bool _isDragging;
+        // bool _isDragging;
 
         LineRenderer _lineRenderer;
         MeshFilter _meshFilter;
@@ -42,12 +42,12 @@ namespace Seiro.UniTriangulation2D.Demo
             if (Input.GetMouseButtonDown(0))
             {
                 ClearPositions();
-                _isDragging = true;
+                // _isDragging = true;
                 AddPosition(GetMousePosition());
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                _isDragging = false;
+                // _isDragging = false;
 
                 var sw = System.Diagnostics.Stopwatch.StartNew();
                 _delaunay = Delaunay2D.Contour(_points);
