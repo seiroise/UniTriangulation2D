@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{EF68D0EE-FF2D-B107-457D-252A7D133371}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/UniTriangulation2D/Core/Delaunay2D.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/UniTriangulation2D/Utilities/Utils2D.cs">
     <Files>
-      <File FileName="Assets/UniTriangulation2D/Core/Delaunay2D.cs" Line="13" Column="27" />
+      <File FileName="Assets/UniTriangulation2D/Core/Delaunay2D.cs" Line="123" Column="17" />
       <File FileName="Assets/UniTriangulation2D/Core/Triangle2D.cs" Line="9" Column="33" />
-      <File FileName="Assets/UniTriangulation2D/Core/Circle2D.cs" Line="21" Column="3" />
+      <File FileName="Assets/UniTriangulation2D/Core/Circle2D.cs" Line="22" Column="28" />
+      <File FileName="Assets/UniTriangulation2D/Utilities/Utils2D.cs" Line="67" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.UniTriangulation2D PreferredExecutionTarget="Unity.Editor" />
