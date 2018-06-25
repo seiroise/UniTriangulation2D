@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Seiro.UniTriangulation2D
+namespace Seiro.UniTriangulation2D.Demo
 {
 
     [RequireComponent(typeof(LineRenderer), typeof(MeshRenderer), typeof(MeshFilter))]
@@ -12,6 +12,8 @@ namespace Seiro.UniTriangulation2D
         public Color[] sampleColors;
 
         public AnimationCurve curve;
+
+        public bool drawDebug = false;
 
         Delaunay2D _delaunay;
 
@@ -73,7 +75,7 @@ namespace Seiro.UniTriangulation2D
                 }
             }
 
-            if (_delaunay != null)
+            if (_delaunay != null && drawDebug)
             {
                 _delaunay.ForeachTriangles((Triangle2D t) =>
                 {
